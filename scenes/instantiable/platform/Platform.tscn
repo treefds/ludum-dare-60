@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://lt376khlbecd"]
+
+[ext_resource type="Script" uid="uid://v0a8lspdkt68" path="res://scenes/instantiable/platform/platform.gd" id="1_8g601"]
+[ext_resource type="Texture2D" uid="uid://cqorova4b26y8" path="res://assets/sprites/platform_anim.png" id="2_8g601"]
+[ext_resource type="AudioStream" uid="uid://bxqay2sik7lhm" path="res://assets/sounds/clunk.wav" id="3_cys1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mewn4"]
+size = Vector2(48, 16)
+
+[sub_resource type="Animation" id="Animation_8g601"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cys1w"]
+resource_name = "running"
+length = 0.5333366944823414
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olbbn"]
+_data = {
+&"RESET": SubResource("Animation_8g601"),
+&"running": SubResource("Animation_cys1w")
+}
+
+[node name="Platform" type="AnimatableBody2D" unique_id=1769776791 node_paths=PackedStringArray("audio_player") groups=["Codable"]]
+texture_filter = 1
+script = ExtResource("1_8g601")
+dependency_leg = null
+codename = null
+audio_player = NodePath("AudioStreamPlayer2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=173710038]
+texture = ExtResource("2_8g601")
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1772422191]
+shape = SubResource("RectangleShape2D_mewn4")
+debug_color = Color(0.59718335, 0.531682, 0.34297475, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2147105808]
+libraries/ = SubResource("AnimationLibrary_olbbn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1880206514]
+stream = ExtResource("3_cys1w")
+volume_db = -6.332
+pitch_scale = 0.89
+attenuation = 0.8122524

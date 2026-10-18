@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ci0rsf3o6w5o4"]
+
+[ext_resource type="Texture2D" uid="uid://b7cipq44px35r" path="res://assets/sprites/terminal_ic.png" id="1_7l3vm"]
+[ext_resource type="Script" uid="uid://bowdxalr32s5x" path="res://scenes/machine/terminal_machine.gd" id="1_d8hpt"]
+[ext_resource type="Texture2D" uid="uid://bkjdt6tbfbxrb" path="res://assets/sprites/interact_hint.png" id="2_8rrng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33gtg"]
+size = Vector2(48, 32)
+
+[node name="Terminal" type="Area2D" unique_id=239677306]
+texture_filter = 1
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_d8hpt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1345894552]
+z_index = -1
+texture_filter = 1
+texture = ExtResource("1_7l3vm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1410111983]
+shape = SubResource("RectangleShape2D_33gtg")
+
+[node name="Hint" type="Sprite2D" parent="." unique_id=889785553]
+visible = false
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("2_8rrng")

@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dkbu0nyual2xf"]
+
+[ext_resource type="Script" uid="uid://dhuxld7g1jxv0" path="res://scenes/instantiable/player/player.gd" id="1_sdri4"]
+[ext_resource type="Texture2D" uid="uid://nerydvp5gimu" path="res://assets/sprites/botty.png" id="2_sdri4"]
+[ext_resource type="AudioStream" uid="uid://d4b0vldljr8r6" path="res://assets/sounds/jump3.wav" id="3_4ws7i"]
+[ext_resource type="AudioStream" uid="uid://unt4icw1h1sx" path="res://assets/sounds/walk.wav" id="4_ygjt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mewn4"]
+size = Vector2(12, 14)
+
+[sub_resource type="Animation" id="Animation_sdri4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4ws7i"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ygjt1"]
+resource_name = "run"
+length = 0.5333366944823414
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13846496, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80fqx"]
+_data = {
+&"RESET": SubResource("Animation_sdri4"),
+&"idle": SubResource("Animation_4ws7i"),
+&"run": SubResource("Animation_ygjt1")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1244928635]
+texture_filter = 1
+collision_layer = 9
+script = ExtResource("1_sdri4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1193207636]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_mewn4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=52324167]
+texture = ExtResource("2_sdri4")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1138786501]
+libraries/ = SubResource("AnimationLibrary_80fqx")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=292037890]
+current = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=18414327]
+stream = ExtResource("3_4ws7i")
+
+[node name="WalkPlayer" type="AudioStreamPlayer" parent="." unique_id=1581626249]
+stream = ExtResource("4_ygjt1")

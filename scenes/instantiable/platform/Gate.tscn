@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c6x8rgm4t48je"]
+
+[ext_resource type="Script" uid="uid://v0a8lspdkt68" path="res://scenes/instantiable/platform/platform.gd" id="1_awcce"]
+[ext_resource type="Texture2D" uid="uid://dwqpo4ds7f1yj" path="res://assets/sprites/gate_vertical.png" id="2_awcce"]
+[ext_resource type="AudioStream" uid="uid://bxqay2sik7lhm" path="res://assets/sounds/clunk.wav" id="3_6wn8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mewn4"]
+size = Vector2(16, 48)
+
+[node name="Gate" type="AnimatableBody2D" unique_id=1769776791 node_paths=PackedStringArray("audio_player") groups=["Codable"]]
+texture_filter = 1
+script = ExtResource("1_awcce")
+audio_player = NodePath("AudioStreamPlayer2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=173710038]
+texture = ExtResource("2_awcce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1772422191]
+shape = SubResource("RectangleShape2D_mewn4")
+debug_color = Color(0.59718335, 0.531682, 0.34297475, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2147105808]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1025259203]
+stream = ExtResource("3_6wn8t")
+volume_db = -6.332
+pitch_scale = 0.89
+attenuation = 0.8122524

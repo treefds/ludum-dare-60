@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cv5cf57ec3cpv"]
+
+[ext_resource type="Script" uid="uid://pr36d5vqvk24" path="res://scenes/game_manager.gd" id="1_ab20p"]
+[ext_resource type="PackedScene" uid="uid://negn1njs7fa4" path="res://scenes/Level.tscn" id="1_e6wxc"]
+[ext_resource type="Shader" uid="uid://di7l0l718cjsc" path="res://resources/shaders/crt.gdshader" id="1_ja6gu"]
+[ext_resource type="PackedScene" uid="uid://dma3pe55kjdhs" path="res://scenes/terminal/terminal.tscn" id="2_ec80j"]
+[ext_resource type="Texture2D" uid="uid://bmglhof5cmhm8" path="res://assets/ui/splash.png" id="5_yvrqe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mewn4"]
+shader = ExtResource("1_ja6gu")
+shader_parameter/resolution = Vector2(512, 384)
+shader_parameter/scan_line_amount = 0.2000000095
+shader_parameter/warp_amount = 0.05
+shader_parameter/vignette_amount = 0.5
+shader_parameter/vignette_intensity = 0.10000000475
+shader_parameter/grille_amount = 0.0230000010925
+shader_parameter/brightness_boost = 1.2
+
+[node name="ViewHolder" type="Control" unique_id=79434278 groups=["Holder"]]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ab20p")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1672779120]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 256.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=933644184]
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(256, 192)
+render_target_update_mode = 4
+
+[node name="Level" parent="SubViewportContainer/SubViewport" unique_id=1448643665 instance=ExtResource("1_e6wxc")]
+
+[node name="Terminal" parent="." unique_id=328256114 instance=ExtResource("2_ec80j")]
+visible = false
+layout_mode = 0
+
+[node name="ThxForPlaying" type="Sprite2D" parent="." unique_id=1086612956]
+visible = false
+texture_filter = 1
+scale = Vector2(8, 8)
+texture = ExtResource("5_yvrqe")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1007260768]
+material = SubResource("ShaderMaterial_mewn4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2048.0
+offset_bottom = 1536.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
